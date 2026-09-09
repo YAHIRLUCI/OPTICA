@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beauty Cosmetics - Carrito</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Poppins',sans-serif; background:#fafafa; color:#222; }
+        a { text-decoration:none; }
+        .text-pink { color:#e83e8c; }
+        .bg-pink { background-color:#e83e8c !important; }
+        .btn-pink { background-color:#e83e8c; color:#fff; border:none; border-radius:50px; padding:10px 30px; font-weight:600; transition:0.3s; }
+        .btn-pink:hover { background-color:#c05c80; color:#fff; transform:translateY(-2px); box-shadow:0 8px 20px rgba(232,62,140,0.3); }
+        .btn-outline-pink { color:#e83e8c; border:2px solid #e83e8c; background:transparent; border-radius:50px; padding:10px 30px; font-weight:600; transition:0.3s; }
+        .btn-outline-pink:hover { background:#e83e8c; color:#fff; }
+        .top-bar { background:#111; color:#ddd; font-size:0.85rem; padding:8px 0; border-bottom:1px solid #333; }
+        .top-bar a { color:#ddd; transition:0.3s; }
+        .top-bar a:hover { color:#e83e8c; }
+        .top-links { display:flex; justify-content:flex-end; gap:18px; align-items:center; }
+        header { background:#fff; padding:18px 0; box-shadow:0 2px 20px rgba(0,0,0,0.04); position:sticky; top:0; z-index:1030; }
+        .logo { font-size:2rem; font-weight:700; letter-spacing:-0.5px; line-height:1.2; }
+        .logo span { color:#e83e8c; }
+        .header-icons a { color:#222; transition:0.3s; font-weight:500; }
+        .header-icons a:hover { color:#e83e8c; }
+        .header-icons i { font-size:1.4rem; }
+        .navbar { background:#fff; border-top:1px solid #eee; border-bottom:1px solid #eee; padding:0; }
+        .navbar .nav-link { color:#444; font-weight:500; padding:16px 12px; transition:0.3s; font-size:0.95rem; }
+        .navbar .nav-link:hover, .navbar .nav-link.active { color:#e83e8c; }
+        .carrito-header { background:linear-gradient(135deg, #fce4ec 0%, #f8d7e8 100%); padding:40px 0; margin-bottom:40px; border-radius:0 0 40px 40px; }
+        .carrito-header h1 { font-size:3rem; font-weight:700; }
+        .carrito-item { background:#fff; border-radius:16px; padding:16px; margin-bottom:16px; box-shadow:0 4px 15px rgba(0,0,0,0.05); display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+        .carrito-item img { width:80px; height:80px; object-fit:cover; border-radius:12px; }
+        .carrito-item .info { flex:1; }
+        .carrito-item .info h5 { margin:0; font-weight:600; }
+        .carrito-item .info .price { color:#e83e8c; font-weight:700; }
+        .carrito-item .cantidad { display:flex; align-items:center; gap:10px; }
+        .carrito-item .cantidad button { border:none; background:#f0f0f0; border-radius:50%; width:32px; height:32px; font-weight:700; transition:0.2s; cursor:pointer; }
+        .carrito-item .cantidad button:hover { background:#e83e8c; color:#fff; }
+        .carrito-item .cantidad span { font-weight:600; min-width:20px; text-align:center; }
+        .carrito-total { background:#fff; border-radius:16px; padding:24px; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
+        .carrito-total .total { font-size:2rem; font-weight:700; color:#e83e8c; }
+        .pago-form { background:#fff; border-radius:16px; padding:24px; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
+        .pago-form .form-control { border-radius:12px; padding:12px 16px; }
+        .pago-form .form-control:focus { border-color:#e83e8c; box-shadow:0 0 0 3px rgba(232,62,140,0.15); }
+        .resumen-compra { background:#f8f9fa; border-radius:16px; padding:20px; }
+        .resumen-compra .item { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #eee; }
+        .resumen-compra .item:last-child { border-bottom:none; }
+        .carrito-vacio {
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .carrito-vacio i { font-size: 4rem; color: #ddd; }
+        .carrito-vacio h4 { margin-top: 1rem; color: #555; }
+        footer { background:#1a1a1a; color:#ccc; padding:60px 0 20px; }
+        footer h3, footer h5 { color:#fff; font-weight:600; }
+        footer h5 { font-size:1rem; margin-bottom:18px; }
+        footer p { color:#aaa; line-height:1.8; }
+        footer ul { list-style:none; padding:0; }
+        footer ul li { margin-bottom:10px; }
+        footer ul li a { color:#aaa; transition:0.3s; }
+        footer ul li a:hover { color:#e83e8c; padding-left:6px; }
+        footer input { border-radius:50px !important; padding:12px 18px !important; border:none !important; }
+        footer .btn-pink { padding:12px; }
+        footer hr { border-color:#333; margin:40px 0 20px; }
+        @media (max-width:991px) { .top-bar { display:none; } }
+        @media (max-width:576px) { .header-icons span { display:none; } .logo { font-size:1.6rem; } .carrito-item { flex-direction:column; text-align:center; } .carrito-header h1 { font-size:2rem; } }
+    </style>
+</head>
+<body>
+    <section class="top-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-center text-lg-start">🚚 Envío gratis en compras mayores a $999</div>
+                <div class="col-lg-4 text-center">💖 10% de descuento en tu primera compra</div>
+                <div class="col-lg-4">
+                    <div class="top-links">
+                        <a href="#">Ayuda</a>
+                        <a href="#">Mis pedidos</a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <header>
+        <div class="container">
+            <div class="row align-items-center g-3">
+                <div class="col-lg-3">
+                    <a href="index.html" class="logo" style="color:#222;">Beauty <span>Cosmetics</span></a>
+                </div>
+                <div class="col-lg-6"></div>
+                <div class="col-lg-3 text-end">
+                    <div class="header-icons d-flex justify-content-end gap-4 align-items-center">
+                        <a href="login.html"><i class="bi bi-person"></i></a>
+                        <a href="#"><i class="bi bi-heart"></i></a>
+                        <a href="carrito.html" class="position-relative">
+                            <i class="bi bi-bag"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-pink" id="carritoCount">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg" id="navbarPrincipal">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <i class="bi bi-list" style="font-size:1.8rem;"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav mx-auto gap-3">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html?categoria=Maquillaje">Maquillaje</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html?categoria=Cuidado%20Facial">Cuidado Facial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html?categoria=Cabello">Cabello</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html?categoria=Perfumes">Perfumes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Marcas</a></li>
+                    <li class="nav-item"><a class="nav-link text-pink" href="#">Promociones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="carrito-header">
+        <div class="container text-center">
+            <h1><i class="bi bi-cart"></i> Mi Carrito</h1>
+            <a href="index.html" class="btn btn-outline-pink mt-3"><i class="bi bi-arrow-left"></i> Seguir comprando</a>
+        </div>
+    </section>
+
+    <section class="py-4">
+        <div class="container">
+            <div id="carritoContenido"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h3 style="font-size:1.8rem;">Beauty Cosmetics</h3>
+                    <p>Productos de belleza, maquillaje y cuidado personal para resaltar tu estilo con la mejor calidad.</p>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Categorías</h5>
+                    <ul>
+                        <li><a href="catalogo.html?categoria=Maquillaje">Maquillaje</a></li>
+                        <li><a href="catalogo.html?categoria=Cuidado%20Facial">Cuidado Facial</a></li>
+                        <li><a href="catalogo.html?categoria=Cabello">Cabello</a></li>
+                        <li><a href="catalogo.html?categoria=Perfumes">Perfumes</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Información</h5>
+                    <ul>
+                        <li><a href="#">Nosotros</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Boletín</h5>
+                    <p>Recibe promociones y novedades.</p>
+                    <form>
+                        <input type="email" class="form-control" placeholder="Correo electrónico" />
+                        <button class="btn btn-pink w-100 mt-2">Suscribirme</button>
+                    </form>
+                </div>
+            </div>
+            <hr />
+            <div class="text-center" style="color:#888; font-size:0.9rem;">© 2026 Beauty Cosmetics | Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function obtenerCarrito() {
+            const data = localStorage.getItem('carrito');
+            return data ? JSON.parse(data) : [];
+        }
+        function guardarCarrito(carrito) {
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            actualizarContadorCarrito();
+            renderizarCarrito();
+        }
+        function actualizarContadorCarrito() {
+            const carrito = obtenerCarrito();
+            const total = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            document.querySelectorAll('#carritoCount').forEach(el => el.textContent = total);
+        }
+        function eliminarDelCarrito(id) {
+            let carrito = obtenerCarrito();
+            carrito = carrito.filter(item => item.id !== id);
+            guardarCarrito(carrito);
+        }
+        function vaciarCarrito() {
+            if (confirm('¿Vaciar carrito?')) {
+                localStorage.removeItem('carrito');
+                actualizarContadorCarrito();
+                renderizarCarrito();
+            }
+        }
+        function cambiarCantidad(id, delta) {
+            const carrito = obtenerCarrito();
+            const item = carrito.find(p => p.id === id);
+            if (!item) return;
+            const nuevaCant = item.cantidad + delta;
+            if (nuevaCant <= 0) {
+                eliminarDelCarrito(id);
+                return;
+            }
+            item.cantidad = nuevaCant;
+            guardarCarrito(carrito);
+        }
+
+        function actualizarResumenPago() {
+            const carrito = obtenerCarrito();
+            const container = document.getElementById('resumenItems');
+            const totalSpan = document.getElementById('resumenTotal');
+            if (!container) return;
+            if (carrito.length === 0) {
+                container.innerHTML = '<p class="text-muted small">No hay productos.</p>';
+                if (totalSpan) totalSpan.textContent = '$0';
+                return;
+            }
+            let html = '';
+            let total = 0;
+            carrito.forEach(item => {
+                const subtotal = item.precio * item.cantidad;
+                total += subtotal;
+                html += `<div class="item"><span>${item.nombre} x${item.cantidad}</span><span>$${subtotal}</span></div>`;
+            });
+            container.innerHTML = html;
+            if (totalSpan) totalSpan.textContent = `$${total}`;
+        }
+
+        function renderizarCarrito() {
+            const contenedor = document.getElementById('carritoContenido');
+            if (!contenedor) return;
+            const carrito = obtenerCarrito();
+
+            if (carrito.length === 0) {
+                contenedor.innerHTML = `
+                    <div class="carrito-vacio text-center">
+                        <i class="bi bi-cart-x"></i>
+                        <h4>Tu carrito está vacío</h4>
+                        <a href="index.html" class="btn btn-pink mt-3">Ir a la tienda</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let total = 0;
+            let listaHtml = '';
+            carrito.forEach(item => {
+                const subtotal = item.precio * item.cantidad;
+                total += subtotal;
+                listaHtml += `
+                    <div class="carrito-item">
+                        <img src="${item.imagen}" alt="${item.nombre}">
+                        <div class="info">
+                            <h5>${item.nombre}</h5>
+                            <div class="price">$${item.precio} c/u</div>
+                        </div>
+                        <div class="cantidad">
+                            <button onclick="cambiarCantidad(${item.id}, -1)">-</button>
+                            <span>${item.cantidad}</span>
+                            <button onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                            <button class="btn btn-outline-danger btn-sm ms-2" onclick="eliminarDelCarrito(${item.id})"><i class="bi bi-trash"></i></button>
+                        </div>
+                        <div class="fw-bold" style="color:#e83e8c;">$${subtotal}</div>
+                    </div>
+                `;
+            });
+
+            contenedor.innerHTML = `
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div id="carritoLista">${listaHtml}</div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="carrito-total mb-4">
+                            <h5>Resumen</h5>
+                            <div class="total" id="totalPrecio">$${total}</div>
+                            <hr />
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-danger" id="btnVaciarCarrito"><i class="bi bi-trash"></i> Vaciar carrito</button>
+                                <button class="btn btn-pink" id="btnMostrarPago"><i class="bi bi-credit-card"></i> Proceder al pago</button>
+                            </div>
+                        </div>
+
+                        <div id="formularioPago" class="pago-form" style="display:none;">
+                            <h5 class="fw-bold mb-3"><i class="bi bi-credit-card"></i> Datos de pago</h5>
+                            <form id="pagoForm">
+                                <div class="mb-3">
+                                    <label class="form-label small">Nombre completo</label>
+                                    <input type="text" class="form-control" id="nombrePago" placeholder="Ej: María Pérez" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small">Dirección de envío</label>
+                                    <input type="text" class="form-control" id="direccionPago" placeholder="Calle, número, colonia" required>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <label class="form-label small">Ciudad</label>
+                                        <input type="text" class="form-control" id="ciudadPago" placeholder="Ciudad" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small">Código postal</label>
+                                        <input type="text" class="form-control" id="cpPago" placeholder="CP" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3 mt-2">
+                                    <label class="form-label small">Número de tarjeta</label>
+                                    <input type="text" class="form-control" id="tarjetaPago" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <label class="form-label small">Fecha exp.</label>
+                                        <input type="text" class="form-control" id="fechaPago" placeholder="MM/AA" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small">CVV</label>
+                                        <input type="text" class="form-control" id="cvvPago" placeholder="123" maxlength="4" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small">Fecha de entrega deseada</label>
+                                    <input type="date" class="form-control" id="fechaEntrega" required>
+                                </div>
+                                <div class="resumen-compra mt-3">
+                                    <h6 class="fw-bold">Resumen de compra</h6>
+                                    <div id="resumenItems"></div>
+                                    <div class="d-flex justify-content-between fw-bold mt-2">
+                                        <span>Total a pagar</span>
+                                        <span id="resumenTotal">$${total}</span>
+                                    </div>
+                                    <div class="mt-2 small text-muted">
+                                        <span>Pedido #<span id="numeroPedido">BE-2026-0000</span></span><br>
+                                        <span>Fecha de pedido: <span id="fechaPedido"></span></span>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-pink w-100 mt-3"><i class="bi bi-check-circle"></i> Confirmar compra</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('btnVaciarCarrito')?.addEventListener('click', vaciarCarrito);
+
+            document.getElementById('btnMostrarPago')?.addEventListener('click', function() {
+                const form = document.getElementById('formularioPago');
+                if (form.style.display === 'none') {
+                    form.style.display = 'block';
+                    actualizarResumenPago();
+                    this.innerHTML = '<i class="bi bi-eye-slash"></i> Ocultar pago';
+                } else {
+                    form.style.display = 'none';
+                    this.innerHTML = '<i class="bi bi-credit-card"></i> Proceder al pago';
+                }
+            });
+
+            const hoy = new Date();
+            document.getElementById('fechaPedido').textContent = hoy.toLocaleDateString('es-ES', { day:'2-digit', month:'2-digit', year:'numeric' });
+            document.getElementById('numeroPedido').textContent = 'BE-2026-' + String(Math.floor(1000 + Math.random() * 9000));
+
+            const fechaMin = new Date();
+            fechaMin.setDate(fechaMin.getDate() + 3);
+            const minDate = fechaMin.toISOString().split('T')[0];
+            const fechaEntrega = document.getElementById('fechaEntrega');
+            fechaEntrega.setAttribute('min', minDate);
+            fechaEntrega.value = minDate;
+
+            document.getElementById('pagoForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const nombre = document.getElementById('nombrePago').value.trim();
+                const direccion = document.getElementById('direccionPago').value.trim();
+                const ciudad = document.getElementById('ciudadPago').value.trim();
+                const cp = document.getElementById('cpPago').value.trim();
+                const tarjeta = document.getElementById('tarjetaPago').value.trim();
+                const fecha = document.getElementById('fechaPago').value.trim();
+                const cvv = document.getElementById('cvvPago').value.trim();
+                const fechaEntregaVal = document.getElementById('fechaEntrega').value;
+
+                if (!nombre || !direccion || !ciudad || !cp || !tarjeta || !fecha || !cvv || !fechaEntregaVal) {
+                    alert('Por favor completa todos los campos.');
+                    return;
+                }
+                if (tarjeta.replace(/\s/g, '').length < 16) {
+                    alert('Número de tarjeta inválido.');
+                    return;
+                }
+
+                const carritoActual = obtenerCarrito();
+                if (carritoActual.length === 0) {
+                    alert('El carrito está vacío.');
+                    return;
+                }
+
+                const totalCompra = carritoActual.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+                const numPedido = document.getElementById('numeroPedido').textContent;
+                const fechaPedido = document.getElementById('fechaPedido').textContent;
+
+                const mensaje = `✅ ¡Compra realizada con éxito!\n\nNúmero de pedido: ${numPedido}\nFecha: ${fechaPedido}\n\nCliente: ${nombre}\nDirección: ${direccion}, ${ciudad}, CP ${cp}\nEntrega estimada: ${fechaEntregaVal}\n\nResumen:\n` +
+                    carritoActual.map(item => `${item.nombre} x${item.cantidad} = $${item.precio * item.cantidad}`).join('\n') +
+                    `\n\nTotal: $${totalCompra}\n\nGracias por tu compra. Beauty Cosmetics`;
+
+                alert(mensaje);
+                localStorage.removeItem('carrito');
+                actualizarContadorCarrito();
+                renderizarCarrito();
+            });
+
+            document.getElementById('tarjetaPago')?.addEventListener('input', function() {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 16) value = value.slice(0, 16);
+                let formatted = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) formatted += ' ';
+                    formatted += value[i];
+                }
+                this.value = formatted;
+            });
+            document.getElementById('fechaPago')?.addEventListener('input', function() {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 4) value = value.slice(0, 4);
+                this.value = value.length >= 2 ? value.slice(0, 2) + '/' + value.slice(2) : value;
+            });
+            document.getElementById('cvvPago')?.addEventListener('input', function() {
+                this.value = this.value.replace(/\D/g, '').slice(0, 4);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderizarCarrito();
+            actualizarContadorCarrito();
+        });
+    </script>
+</body>
+</html>

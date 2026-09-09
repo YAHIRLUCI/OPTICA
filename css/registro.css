@@ -1,0 +1,662 @@
+/*==================================================
+                GOOGLE FONT
+==================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/*==================================================
+                    VARIABLES
+==================================================*/
+
+:root{
+
+    --rosa:#E77CA7;
+    --rosa-hover:#D65B8C;
+    --rosa-claro:#FFF3F8;
+
+    --blanco:#FFFFFF;
+
+    --gris:#777777;
+    --gris-claro:#F7F7F7;
+    --gris-borde:#DDDDDD;
+
+    --negro:#222222;
+
+    --shadow:0 15px 45px rgba(0,0,0,.12);
+
+}
+
+/*==================================================
+                    GENERAL
+==================================================*/
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:linear-gradient(135deg,#FFF8FB,#FFE9F2);
+
+    min-height:100vh;
+
+}
+
+/*==================================================
+                CONTENEDOR
+==================================================*/
+
+.registro-container{
+
+    width:100%;
+
+    min-height:100vh;
+
+}
+
+/*==================================================
+                PANEL IZQUIERDO
+==================================================*/
+
+.registro-banner{
+
+    position:relative;
+
+    width:100%;
+
+    height:100vh;
+
+    overflow:hidden;
+
+}
+
+.registro-banner img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+/*==================================================
+                    OVERLAY
+==================================================*/
+
+.banner-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        rgba(0,0,0,.45),
+        rgba(231,124,167,.55)
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:60px;
+
+    color:white;
+
+}
+
+.banner-content{
+
+    max-width:500px;
+
+}
+
+.banner-content h1{
+
+    font-size:56px;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+.banner-content span{
+
+    color:#FFD6E8;
+
+}
+
+.banner-content h2{
+
+    font-size:34px;
+
+    margin-bottom:25px;
+
+    line-height:1.4;
+
+}
+
+.banner-content p{
+
+    font-size:18px;
+
+    line-height:1.8;
+
+}
+
+/*==================================================
+                PANEL DERECHO
+==================================================*/
+
+.registro-content{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+    min-height:100vh;
+
+}
+
+/*==================================================
+                TARJETA
+==================================================*/
+
+.registro-card{
+
+    width:100%;
+
+    max-width:700px;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:45px;
+
+    box-shadow:var(--shadow);
+
+}
+
+/*==================================================
+                TÍTULOS
+==================================================*/
+
+.registro-card h2{
+
+    font-size:38px;
+
+    font-weight:700;
+
+    color:var(--negro);
+
+}
+
+.registro-card p{
+
+    color:var(--gris);
+
+    margin-top:10px;
+
+}
+
+/*==================================================
+                INPUTS
+==================================================*/
+
+.form-label{
+
+    font-weight:600;
+
+    color:var(--negro);
+
+    margin-bottom:10px;
+
+}
+
+.input-group{
+
+    margin-bottom:10px;
+
+}
+
+.input-group-text{
+
+    background:var(--blanco);
+
+    border:1px solid var(--gris-borde);
+
+    border-right:none;
+
+    border-radius:12px 0 0 12px;
+
+    color:var(--rosa);
+
+    padding:14px 18px;
+
+}
+
+.form-control{
+
+    border:1px solid var(--gris-borde);
+
+    border-left:none;
+
+    border-radius:0 12px 12px 0;
+
+    height:55px;
+
+    font-size:15px;
+
+    box-shadow:none;
+
+    transition:.3s;
+
+}
+
+.form-control:focus{
+
+    border-color:var(--rosa);
+
+    box-shadow:none;
+
+}
+
+/*==================================================
+        BOTÓN MOSTRAR CONTRASEÑA
+==================================================*/
+
+#togglePassword{
+
+    border:1px solid var(--gris-borde);
+
+    border-left:none;
+
+    border-radius:0 12px 12px 0;
+
+    background:white;
+
+    transition:.3s;
+
+}
+
+#togglePassword:hover{
+
+    background:var(--rosa-claro);
+
+}
+
+/*==================================================
+        BARRA DE FORTALEZA
+==================================================*/
+
+.progress{
+
+    border-radius:20px;
+
+    background:#EFEFEF;
+
+}
+
+.progress-bar{
+
+    transition:.35s;
+
+    border-radius:20px;
+
+}
+
+/*==================================================
+            CHECKBOX
+==================================================*/
+
+.form-check{
+
+    margin-top:10px;
+
+}
+
+.form-check-input{
+
+    cursor:pointer;
+
+}
+
+.form-check-input:checked{
+
+    background:var(--rosa);
+
+    border-color:var(--rosa);
+
+}
+
+.form-check-label{
+
+    color:#555;
+
+    line-height:1.6;
+
+}
+
+.form-check-label a{
+
+    color:var(--rosa);
+
+    font-weight:600;
+
+}
+
+.form-check-label a:hover{
+
+    color:var(--rosa-hover);
+
+}
+
+/*==================================================
+            BOTÓN REGISTRO
+==================================================*/
+
+.btn-register{
+
+    background:var(--rosa);
+
+    color:white;
+
+    height:56px;
+
+    border-radius:50px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+    border:none;
+
+}
+
+.btn-register:hover{
+
+    background:var(--rosa-hover);
+
+    color:white;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(231,124,167,.35);
+
+}
+
+/*==================================================
+            SEPARADOR
+==================================================*/
+
+.separator{
+
+    position:relative;
+
+    text-align:center;
+
+    margin:35px 0;
+
+}
+
+.separator::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:50%;
+
+    left:0;
+
+    width:100%;
+
+    height:1px;
+
+    background:#DDD;
+
+}
+
+.separator span{
+
+    position:relative;
+
+    background:white;
+
+    padding:0 18px;
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+/*==================================================
+        BOTONES SOCIALES
+==================================================*/
+
+.social-login{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+.social-login a{
+
+    flex:1;
+
+    text-align:center;
+
+    border:1px solid #DDD;
+
+    border-radius:12px;
+
+    padding:14px;
+
+    color:#333;
+
+    font-weight:500;
+
+    transition:.3s;
+
+}
+
+.social-login a i{
+
+    margin-right:8px;
+
+}
+
+.social-login .google:hover{
+
+    background:#DB4437;
+
+    color:white;
+
+    border-color:#DB4437;
+
+}
+
+.social-login .facebook:hover{
+
+    background:#1877F2;
+
+    color:white;
+
+    border-color:#1877F2;
+
+}
+
+/*==================================================
+        ENLACE LOGIN
+==================================================*/
+
+.register-link{
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:15px;
+
+}
+
+.register-link a{
+
+    color:var(--rosa);
+
+    font-weight:600;
+
+}
+
+.register-link a:hover{
+
+    color:var(--rosa-hover);
+
+}
+
+/*==================================================
+        INPUTS INVÁLIDOS
+==================================================*/
+
+.form-control.is-invalid{
+
+    border-color:#DC3545;
+
+}
+
+.input-group:has(.is-invalid) .input-group-text{
+
+    border-color:#DC3545;
+
+    color:#DC3545;
+
+}
+
+/*==================================================
+            SCROLL
+==================================================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--rosa);
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#F5F5F5;
+
+}
+
+/*==================================================
+            RESPONSIVE
+==================================================*/
+
+@media(max-width:991px){
+
+    .registro-content{
+
+        padding:30px 20px;
+
+        min-height:auto;
+
+    }
+
+    .registro-card{
+
+        max-width:100%;
+
+        padding:35px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    body{
+
+        overflow:auto;
+
+    }
+
+    .registro-card{
+
+        padding:30px 25px;
+
+        border-radius:18px;
+
+    }
+
+    .registro-card h2{
+
+        font-size:30px;
+
+    }
+
+    .social-login{
+
+        flex-direction:column;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .registro-card{
+
+        padding:25px 18px;
+
+    }
+
+    .banner-content h1{
+
+        font-size:40px;
+
+    }
+
+    .banner-content h2{
+
+        font-size:26px;
+
+    }
+
+    .btn-register{
+
+        font-size:16px;
+
+    }
+
+}

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beauty Cosmetics</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+
+    <style>
+        /* ==========================================
+           ESTILOS ELEGANTES Y PROFESIONALES
+           ========================================== */
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Poppins',sans-serif; background:#fafafa; color:#222; }
+        a { text-decoration:none; }
+        .text-pink { color:#e83e8c; }
+        .bg-pink { background-color:#e83e8c !important; }
+        .btn-pink { background-color:#e83e8c; color:#fff; border:none; border-radius:50px; padding:10px 30px; font-weight:600; transition:0.3s; }
+        .btn-pink:hover { background-color:#c05c80; color:#fff; transform:translateY(-2px); box-shadow:0 8px 20px rgba(232,62,140,0.3); }
+        .btn-outline-pink { color:#e83e8c; border:2px solid #e83e8c; background:transparent; border-radius:50px; padding:10px 30px; font-weight:600; transition:0.3s; }
+        .btn-outline-pink:hover { background:#e83e8c; color:#fff; }
+
+        .top-bar { background:#111; color:#ddd; font-size:0.85rem; padding:8px 0; border-bottom:1px solid #333; }
+        .top-bar a { color:#ddd; transition:0.3s; }
+        .top-bar a:hover { color:#e83e8c; }
+        .top-links { display:flex; justify-content:flex-end; gap:18px; align-items:center; }
+
+        header { background:#fff; padding:18px 0; box-shadow:0 2px 20px rgba(0,0,0,0.04); position:sticky; top:0; z-index:1030; }
+        .logo { font-size:2rem; font-weight:700; letter-spacing:-0.5px; line-height:1.2; }
+        .logo span { color:#e83e8c; }
+
+        .search-box { display:flex; align-items:center; background:#fff; border:2px solid #e9ecef; border-radius:60px; padding:0 6px 0 20px; transition:border-color 0.3s, box-shadow 0.3s; position:relative; }
+        .search-box:focus-within { border-color:#e83e8c; box-shadow:0 0 0 4px rgba(232,62,140,0.12); }
+        .search-box input[type="text"] { border:none; background:transparent; outline:none; width:100%; padding:12px 10px 12px 0; font-size:0.95rem; color:#222; }
+        .search-box input::placeholder { color:#aaa; }
+        .search-box .btn-icon { background:transparent; border:none; color:#888; font-size:1.2rem; padding:0 8px; transition:0.3s; cursor:pointer; display:flex; align-items:center; justify-content:center; height:44px; width:44px; border-radius:50%; }
+        .search-box .btn-icon:hover { color:#e83e8c; background:rgba(232,62,140,0.06); }
+        .search-box .btn-icon:disabled { opacity:0.6; cursor:not-allowed; }
+        .search-box .btn-search-submit { background:#e83e8c; color:#fff; border:none; border-radius:60px; padding:10px 24px; font-weight:600; transition:0.3s; margin-left:4px; }
+        .search-box .btn-search-submit:hover { background:#c05c80; transform:scale(1.02); }
+
+        #suggestions { position:absolute; top:calc(100% + 6px); left:0; right:0; background:#fff; border-radius:16px; box-shadow:0 12px 40px rgba(0,0,0,0.12); border:1px solid #f0f0f0; overflow:hidden; z-index:1099; display:none; max-height:380px; overflow-y:auto; }
+        #suggestions .suggestion-item { padding:12px 20px; cursor:pointer; border-bottom:1px solid #f5f5f5; transition:0.2s; display:flex; justify-content:space-between; align-items:center; }
+        #suggestions .suggestion-item:hover { background:#f8f9fa; }
+        #suggestions .suggestion-item:last-child { border-bottom:none; }
+        #suggestions .suggestion-name { font-weight:500; color:#222; }
+        #suggestions .suggestion-category { font-size:0.75rem; color:#888; }
+        #suggestions .suggestion-price { font-weight:600; color:#e83e8c; }
+        #suggestions .no-results { padding:20px; text-align:center; color:#888; }
+
+        .header-icons a { color:#222; transition:0.3s; font-weight:500; }
+        .header-icons a:hover { color:#e83e8c; }
+        .header-icons i { font-size:1.4rem; }
+
+        .navbar { background:#fff; border-top:1px solid #eee; border-bottom:1px solid #eee; padding:0; }
+        .navbar .nav-link { color:#444; font-weight:500; padding:16px 12px; transition:0.3s; font-size:0.95rem; }
+        .navbar .nav-link:hover, .navbar .nav-link.active { color:#e83e8c; }
+        .navbar .nav-link.active { font-weight:600; }
+
+        .hero { margin-bottom:60px; }
+        .carousel-item { height:520px; background:linear-gradient(135deg, #fce4ec 0%, #f8d7e8 100%); position:relative; }
+        .carousel-item img { height:100%; width:100%; object-fit:cover; filter:brightness(0.75); }
+        .carousel-caption { top:50%; transform:translateY(-50%); bottom:auto; text-align:left; left:8%; right:auto; max-width:600px; z-index:2; }
+        .carousel-caption h5 { color:#e83e8c; letter-spacing:3px; text-transform:uppercase; font-size:0.9rem; font-weight:600; }
+        .carousel-caption h1 { font-size:3.5rem; font-weight:700; color:#222; margin:12px 0; }
+        .carousel-caption p { color:#555; font-size:1.1rem; margin-bottom:24px; }
+
+        .categories { padding:70px 0; background:#fff; }
+        .category-card { background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.05); transition:0.35s; cursor:pointer; border:1px solid #f0f0f0; }
+        .category-card:hover { transform:translateY(-8px); box-shadow:0 16px 45px rgba(0,0,0,0.10); }
+        .category-card img { height:200px; width:100%; object-fit:cover; transition:0.4s; }
+        .category-card:hover img { transform:scale(1.04); }
+        .category-info { padding:22px 16px; text-align:center; background:#fafafa; }
+        .category-info h4 { font-size:1.2rem; font-weight:600; margin-bottom:6px; }
+        .category-info a { color:#e83e8c; font-weight:500; font-size:0.9rem; }
+        .category-info a:hover { color:#c05c80; }
+
+        .benefits { padding:60px 0; background:#f8f9fa; border-top:1px solid #eee; border-bottom:1px solid #eee; }
+        .benefit { padding:20px; transition:0.3s; border-radius:16px; }
+        .benefit:hover { background:#fff; box-shadow:0 8px 25px rgba(0,0,0,0.05); }
+        .benefit i { font-size:2.8rem; color:#e83e8c; }
+        .benefit h5 { font-weight:600; margin-top:12px; }
+        .benefit p { color:#888; font-size:0.9rem; }
+
+        footer { background:#1a1a1a; color:#ccc; padding:60px 0 20px; }
+        footer h3, footer h5 { color:#fff; font-weight:600; }
+        footer h5 { font-size:1rem; margin-bottom:18px; }
+        footer p { color:#aaa; line-height:1.8; }
+        footer ul { list-style:none; padding:0; }
+        footer ul li { margin-bottom:10px; }
+        footer ul li a { color:#aaa; transition:0.3s; }
+        footer ul li a:hover { color:#e83e8c; padding-left:6px; }
+        footer input { border-radius:50px !important; padding:12px 18px !important; border:none !important; }
+        footer .btn-pink { padding:12px; }
+        footer hr { border-color:#333; margin:40px 0 20px; }
+
+        .toast-container { z-index:9999; }
+
+        .modal-product-img { width:100%; border-radius:16px; object-fit:cover; max-height:400px; }
+        .modal-stars { color:#f5b342; font-size:1.2rem; }
+        .modal-price { font-size:2rem; font-weight:700; color:#e83e8c; }
+        .reseña-item { border-bottom:1px solid #f0f0f0; padding:12px 0; }
+        .reseña-item:last-child { border-bottom:none; }
+        .form-reseña textarea { border-radius:16px; resize:vertical; }
+        .form-reseña .rating-input { display:flex; gap:5px; font-size:1.8rem; cursor:pointer; }
+        .form-reseña .rating-input i { transition:0.2s; }
+        .form-reseña .rating-input i:hover { transform:scale(1.2); }
+
+        @media (max-width:991px) { .top-bar { display:none; } .carousel-item { height:380px; } .carousel-caption h1 { font-size:2.5rem; } }
+        @media (max-width:576px) { .carousel-item { height:280px; } .carousel-caption h1 { font-size:1.8rem; } .carousel-caption p { display:none; } .header-icons span { display:none; } .logo { font-size:1.6rem; } }
+
+        .hidden-animation { opacity:0; transform:translateY(40px); transition:0.8s ease; }
+        .show-animation { opacity:1; transform:translateY(0); }
+        ::-webkit-scrollbar { width:8px; }
+        ::-webkit-scrollbar-track { background:#f1f1f1; }
+        ::-webkit-scrollbar-thumb { background:#e83e8c; border-radius:20px; }
+        ::-webkit-scrollbar-thumb:hover { background:#c05c80; }
+    </style>
+</head>
+<body>
+
+    <!-- ========================== TOP BAR ========================== -->
+    <section class="top-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-center text-lg-start">🚚 Envío gratis en compras mayores a $999</div>
+                <div class="col-lg-4 text-center">💖 10% de descuento en tu primera compra</div>
+                <div class="col-lg-4">
+                    <div class="top-links">
+                        <a href="#">Ayuda</a>
+                        <a href="#">Mis pedidos</a>
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== HEADER ========================== -->
+    <header>
+        <div class="container">
+            <div class="row align-items-center g-3">
+                <div class="col-lg-3">
+                    <div class="logo">Beauty <span>Cosmetics</span></div>
+                </div>
+                <div class="col-lg-5">
+                    <form id="searchForm">
+                        <div class="search-box">
+                            <input type="text" id="busqueda" placeholder="Buscar productos..." autocomplete="off" />
+                            <button type="button" id="btnBuscarImagen" class="btn-icon" title="Tomar foto o subir imagen para buscar producto"><i class="bi bi-camera"></i></button>
+                            <input type="file" id="inputImagen" accept="image/*" capture="environment" style="display:none;" />
+                            <button type="button" id="btnDictarBusqueda" class="btn-icon" title="Buscar por voz"><i class="bi bi-mic"></i></button>
+                            <button type="submit" class="btn-search-submit"><i class="bi bi-search"></i> Buscar</button>
+                            <div id="suggestions"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <div class="header-icons d-flex justify-content-lg-end gap-4 align-items-center">
+                        <a href="login.html" class="d-flex align-items-center gap-2"><i class="bi bi-person"></i><span>Iniciar sesión</span></a>
+                        <a href="#"><i class="bi bi-heart"></i></a>
+                        <a href="carrito.html" class="position-relative">
+                            <i class="bi bi-bag"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-pink" id="carritoCount">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================== NAVBAR FUNCIONAL ========================== -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <i class="bi bi-list" style="font-size:1.8rem;"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav mx-auto gap-3">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html?categoria=Maquillaje">Maquillaje</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html?categoria=Cuidado Facial">Cuidado Facial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html?categoria=Cabello">Cabello</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalogo.html?categoria=Perfumes">Perfumes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Marcas</a></li>
+                    <li class="nav-item"><a class="nav-link text-pink" href="#">Promociones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========================== CARRUSEL ========================== -->
+    <section class="hero">
+        <div id="carouselBeauty" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1600&q=80" alt="Maquillaje" />
+                    <div class="carousel-caption">
+                        <h5>Descubre tu belleza natural</h5>
+                        <h1>Maquillaje para cada ocasión</h1>
+                        <p>Productos de alta calidad para resaltar tu estilo.</p>
+                        <a href="catalogo.html?categoria=Maquillaje" class="btn btn-pink">Comprar ahora</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1600&q=80" alt="Cuidado facial" />
+                    <div class="carousel-caption">
+                        <h5>Nueva colección</h5>
+                        <h1>Cuidado de la piel avanzado</h1>
+                        <p>Mantén tu piel saludable con nuestra línea premium.</p>
+                        <a href="catalogo.html?categoria=Cuidado Facial" class="btn btn-pink">Ver productos</a>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1600&q=80" alt="Perfumes" />
+                    <div class="carousel-caption">
+                        <h5>Fragancias exclusivas</h5>
+                        <h1>Perfumes originales</h1>
+                        <p>Encuentra el aroma perfecto para cualquier momento.</p>
+                        <a href="catalogo.html?categoria=Perfumes" class="btn btn-pink">Explorar</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselBeauty" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselBeauty" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ========================== CATEGORÍAS ========================== -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-title text-center mb-5">
+                <h2 class="fw-bold" style="font-size:2.5rem;">Nuestras Categorías</h2>
+                <p class="text-muted">Encuentra todo lo que necesitas para cuidar tu belleza.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80" alt="Maquillaje" />
+                        <div class="category-info">
+                            <h4>Maquillaje</h4>
+                            <a href="catalogo.html?categoria=Maquillaje">Ver más →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80" alt="Cuidado Facial" />
+                        <div class="category-info">
+                            <h4>Cuidado Facial</h4>
+                            <a href="catalogo.html?categoria=Cuidado Facial">Ver más →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80" alt="Cabello" />
+                        <div class="category-info">
+                            <h4>Cabello</h4>
+                            <a href="catalogo.html?categoria=Cabello">Ver más →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card">
+                        <img src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=600&q=80" alt="Perfumes" />
+                        <div class="category-info">
+                            <h4>Perfumes</h4>
+                            <a href="catalogo.html?categoria=Perfumes">Ver más →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== BENEFICIOS ========================== -->
+    <section class="benefits">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="benefit"><i class="bi bi-truck"></i><h5>Envíos Gratis</h5><p>En compras mayores a $999.</p></div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="benefit"><i class="bi bi-credit-card"></i><h5>Pago Seguro</h5><p>Múltiples métodos de pago.</p></div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="benefit"><i class="bi bi-patch-check"></i><h5>Productos Originales</h5><p>Marcas 100% certificadas.</p></div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="benefit"><i class="bi bi-headset"></i><h5>Soporte</h5><p>Atención personalizada.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================== FOOTER ========================== -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h3 style="font-size:1.8rem;">Beauty Cosmetics</h3>
+                    <p>Productos de belleza, maquillaje y cuidado personal para resaltar tu estilo con la mejor calidad.</p>
+                </div>
+                <div class="col-lg-2">
+                    <h5>Categorías</h5>
+                    <ul>
+                        <li><a href="catalogo.html?categoria=Maquillaje">Maquillaje</a></li>
+                        <li><a href="catalogo.html?categoria=Cuidado Facial">Cuidado Facial</a></li>
+                        <li><a href="catalogo.html?categoria=Cabello">Cabello</a></li>
+                        <li><a href="catalogo.html?categoria=Perfumes">Perfumes</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Información</h5>
+                    <ul>
+                        <li><a href="#">Nosotros</a></li>
+                        <li><a href="#">Preguntas Frecuentes</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Boletín</h5>
+                    <p>Recibe promociones y novedades.</p>
+                    <form>
+                        <input type="email" class="form-control" placeholder="Correo electrónico" />
+                        <button class="btn btn-pink w-100 mt-2">Suscribirme</button>
+                    </form>
+                </div>
+            </div>
+            <hr />
+            <div class="text-center" style="color:#888; font-size:0.9rem;">© 2026 Beauty Cosmetics | Todos los derechos reservados.</div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE PRODUCTO -->
+    <div class="modal fade" id="productoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content" style="border-radius:20px; overflow:hidden;">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="modalProductoTitulo">Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <div class="col-md-5">
+                            <img id="modalProductoImagen" src="" alt="" class="modal-product-img" />
+                        </div>
+                        <div class="col-md-7">
+                            <h4 id="modalProductoNombre" class="fw-bold"></h4>
+                            <div class="modal-stars mb-2" id="modalProductoEstrellas"></div>
+                            <p class="text-muted small mb-1">Categoría: <span id="modalProductoCategoria" class="text-pink"></span></p>
+                            <div class="modal-price mb-3" id="modalProductoPrecio"></div>
+                            <p id="modalProductoDescripcion" class="mb-4"></p>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button class="btn btn-pink" id="btnAgregarCarrito"><i class="bi bi-bag-plus"></i> Agregar al carrito</button>
+                                <button class="btn btn-outline-pink" id="btnComprarAhora"><i class="bi bi-lightning"></i> Comprar ahora</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4" />
+                    <h5 class="fw-bold mb-3">Reseñas</h5>
+                    <div id="modalReseñasContainer" class="mb-4"></div>
+                    <form id="formReseña" class="form-reseña">
+                        <h6 class="fw-semibold">Escribe tu reseña</h6>
+                        <div class="mb-2">
+                            <input type="text" id="reseñaUsuario" class="form-control" placeholder="Tu nombre (opcional)" style="border-radius:12px;" />
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label small">Calificación</label>
+                            <div class="rating-input" id="ratingInput">
+                                <i class="bi bi-star" data-rating="1"></i>
+                                <i class="bi bi-star" data-rating="2"></i>
+                                <i class="bi bi-star" data-rating="3"></i>
+                                <i class="bi bi-star" data-rating="4"></i>
+                                <i class="bi bi-star" data-rating="5"></i>
+                            </div>
+                            <input type="hidden" id="reseñaEstrellas" value="0" />
+                        </div>
+                        <div class="mb-3">
+                            <textarea id="reseñaComentario" class="form-control" rows="3" placeholder="Escribe tu comentario..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-pink btn-sm">Enviar reseña</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de confirmación -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toastCarrito" class="toast align-items-center text-white bg-pink border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body"><i class="bi bi-check-circle-fill me-2"></i> Producto agregado al carrito</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
